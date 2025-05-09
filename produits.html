@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Boutique ISAE-SUPAERO</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="logo">Boutique ISAE-SUPAERO</div>
+      <ul class="nav-links">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="perm.html">Permanences</a></li>
+        <li><a href="produits.html">Nos produits</a></li>
+        <li><a href="equipe.html">L'équipe</a></li>
+      </ul>
+    </nav>
+    <div class="banner">
+      <h1>Nos produits</h1>
+    </div>
+  </header>
+
+  <main class="home-sections">
+  
+
+  <div class="filters-section">
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Rechercher un produit...">
+    </div>
+
+    <div class="category-bar">
+      <button onclick="filterProducts('all')">Tous</button>
+      <button onclick="filterProducts('haut')">Hauts</button>
+      <button onclick="filterProducts('bas')">Bas</button>
+      <button onclick="filterProducts('accessoire')">Accessoires & Autres</button>
+    </div>
+  </div>
+
+  <div class="products-grid" id="productGrid">
+    <div class="product" data-category="haut">
+      <h2>Sweat Bleu Navy</h2>
+      <img src="sweat.jpg" alt="Sweat Bleu Navy">
+      <p class="price">Adhérents AE : 25€<br>Prix public : 30€</p>
+      <div class="btns">
+        <button onclick="openModal('modal1')">Plus d'infos</button>
+        <a href="https://payment-link" target="_blank">Réserver en click & collect</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="modal1">
+    <div class="modal-content">
+      <span class="modal-close" onclick="closeModal('modal1')">&times;</span>
+      <h2>Sweat Bleu Navy</h2>
+      <p><strong>Description :</strong> Sweat confortable en coton bio.</p>
+      <p><strong>Composition :</strong> 80% coton, 20% polyester</p>
+      <p><strong>Coloris disponibles :</strong> Bleu Navy, Gris clair</p>
+      <p><strong>Consulter les stocks :</strong> <a href="https://docs.google.com/spreadsheets/d/stock" target="_blank">Voir la feuille de stock</a></p>
+    </div>
+  </div>
+
+
+  <script>
+    function openModal(id) {
+      document.getElementById(id).style.display = 'flex';
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).style.display = 'none';
+    }
+
+    function filterProducts(category) {
+      const products = document.querySelectorAll('.product');
+      products.forEach(product => {
+        const productCategory = product.getAttribute('data-category');
+        if (category === 'all' || productCategory === category) {
+          product.style.display = 'block';
+        } else {
+          product.style.display = 'none';
+        }
+      });
+    }
+  </script>
+
+  </main>
+
+  <footer>
+    <p>Une question ?<br/>Contactez-nous : <a href="mailto:isaesupaeroboutique@gmail.com">isaesupaeroboutique@gmail.com</a></p>
+  </footer>
+</body>
+</html>
