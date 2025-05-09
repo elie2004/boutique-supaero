@@ -20,25 +20,26 @@
     <div class="banner">
       <h1>Nos produits</h1>
     </div>
+
+    <div class="filters-wrapper">
+      <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Rechercher un produit...">
+      </div>
+    
+      <div class="category-bar">
+        <button onclick="filterProducts('all')">Tous</button>
+        <button onclick="filterProducts('haut')">Hauts</button>
+        <button onclick="filterProducts('bas')">Bas</button>
+        <button onclick="filterProducts('accessoire')">Accessoires & Autres</button>
+      </div>
+    </div>
   </header>
 
   <main class="home-sections">
   
 
-  <div class="filters-wrapper">
-    <div class="search-bar">
-      <input type="text" id="searchInput" placeholder="Rechercher un produit...">
-    </div>
   
-    <div class="category-bar">
-      <button onclick="filterProducts('all')">Tous</button>
-      <button onclick="filterProducts('haut')">Hauts</button>
-      <button onclick="filterProducts('bas')">Bas</button>
-      <button onclick="filterProducts('accessoire')">Accessoires & Autres</button>
-    </div>
-  </div>
   
-  <div class="separator"></div>
 
 
   <div class="products-grid" id="productGrid">
