@@ -38,13 +38,9 @@
   <main class="home-sections">
   
 
-  
-  
-
-
   <div class="products-grid" id="productGrid">
     <div class="product" data-category="haut">
-      <h2>Sweat Bleu Navy</h2>
+      <h2>Sweat de Promo</h2>
       <img src="sweat.jpg" alt="Sweat Bleu Navy">
       <p class="price">Adhérents AE : 25€<br>Prix public : 30€</p>
       <div class="btns">
@@ -61,14 +57,31 @@
       <p><strong>Description :</strong> Sweat confortable en coton bio.</p>
       <p><strong>Composition :</strong> 80% coton, 20% polyester</p>
       <p><strong>Coloris disponibles :</strong> Bleu Navy, Gris clair</p>
-      <p><strong>Consulter les stocks :</strong> <a href="https://docs.google.com/spreadsheets/d/stock" target="_blank">Voir la feuille de stock</a></p>
+      <button onclick="openModal('modal2')"> Consulter nos stocks </button>
     </div>
   </div>
 
+  <div class="modal" id="modal2">
+    <div class="modal-content">
+      <span class="modal-close" onclick="closeModal('modal2')">&times;</span>
+      <p> Cette fonctionnalité arrive bientôt !</p>
+    </div>
+  </div>
+
+
+
+ <!-- Produit 2 -->
   <div class="products-grid" id="productGrid">
     <div class="product" data-category="haut">
-      <h2>Sweat Bleu Navy</h2>
-      <img src="sweat.jpg" alt="Sweat Bleu Navy">
+      <h2>Sweat de Promo</h2>
+      <div class="carousel">
+        <img src="sweat1.jpg" alt="Bleu Navy" class="active">
+        <img src="sweat2.jpg" alt="Gris clair">
+        <div class="carousel-controls">
+          <button onclick="prevSlide(this)">&#10094;</button>
+          <button onclick="nextSlide(this)">&#10095;</button>
+        </div>
+      </div>
       <p class="price">Adhérents AE : 25€<br>Prix public : 30€</p>
       <div class="btns">
         <button onclick="openModal('modal1')">Plus d'infos</button>
@@ -84,14 +97,30 @@
       <p><strong>Description :</strong> Sweat confortable en coton bio.</p>
       <p><strong>Composition :</strong> 80% coton, 20% polyester</p>
       <p><strong>Coloris disponibles :</strong> Bleu Navy, Gris clair</p>
-      <p><strong>Consulter les stocks :</strong> <a href="https://docs.google.com/spreadsheets/d/stock" target="_blank">Voir la feuille de stock</a></p>
+      <button onclick="openModal('modal2')"> Consulter nos stocks </button>
     </div>
   </div>
 
+  <div class="modal" id="modal2">
+    <div class="modal-content">
+      <span class="modal-close" onclick="closeModal('modal2')">&times;</span>
+      <p> Cette fonctionnalité arrive bientôt !</p>
+    </div>
+  </div>
+
+
+  <!-- Produit 3 -->
   <div class="products-grid" id="productGrid">
     <div class="product" data-category="haut">
-      <h2>Sweat Bleu Navy</h2>
-      <img src="sweat.jpg" alt="Sweat Bleu Navy">
+      <h2>Sweat de Promo</h2>
+      <div class="carousel">
+        <img src="sweat3.jpg" alt="Bleu Navy" class="active">
+        <img src="sweat.jpg" alt="Gris clair">
+        <div class="carousel-controls">
+          <button onclick="prevSlide(this)">&#10094;</button>
+          <button onclick="nextSlide(this)">&#10095;</button>
+        </div>
+      </div>
       <p class="price">Adhérents AE : 25€<br>Prix public : 30€</p>
       <div class="btns">
         <button onclick="openModal('modal1')">Plus d'infos</button>
@@ -107,10 +136,17 @@
       <p><strong>Description :</strong> Sweat confortable en coton bio.</p>
       <p><strong>Composition :</strong> 80% coton, 20% polyester</p>
       <p><strong>Coloris disponibles :</strong> Bleu Navy, Gris clair</p>
-      <p><strong>Consulter les stocks :</strong> <a href="https://docs.google.com/spreadsheets/d/stock" target="_blank">Voir la feuille de stock</a></p>
+      <button onclick="openModal('modal2')"> Consulter nos stocks </button>
     </div>
   </div>
 
+  <div class="modal" id="modal2">
+    <div class="modal-content">
+      <span class="modal-close" onclick="closeModal('modal2')">&times;</span>
+      <p> Cette fonctionnalité arrive bientôt !</p>
+    </div>
+  </div>
+  
   <script>
     function openModal(id) {
       document.getElementById(id).style.display = 'flex';
@@ -121,15 +157,46 @@
     }
 
     function filterProducts(category) {
+      const searchTerm = document.getElementById('searchInput').value.toLowerCase();
       const products = document.querySelectorAll('.product');
       products.forEach(product => {
-        const productCategory = product.getAttribute('data-category');
-        if (category === 'all' || productCategory === category) {
-          product.style.display = 'block';
-        } else {
-          product.style.display = 'none';
-        }
+        const matchesCategory = (category === 'all' || product.dataset.category === category);
+        const title = product.querySelector('h2').textContent.toLowerCase();
+        const matchesSearch = title.includes(searchTerm);
+        product.style.display = (matchesCategory && matchesSearch) ? 'block' : 'none';
       });
+    }
+
+    document.getElementById('searchInput').addEventListener('input', () => {
+      const activeBtn = document.querySelector('.category-bar button.active');
+      const category = activeBtn ? activeBtn.textContent.toLowerCase() : 'all';
+      filterProducts(category);
+    });
+
+    const categoryButtons = document.querySelectorAll('.category-bar button');
+    categoryButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        categoryButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      });
+    });
+
+    function nextSlide(button) {
+      const carousel = button.closest('.carousel');
+      const images = carousel.querySelectorAll('img');
+      let index = [...images].findIndex(img => img.classList.contains('active'));
+      images[index].classList.remove('active');
+      index = (index + 1) % images.length;
+      images[index].classList.add('active');
+    }
+
+    function prevSlide(button) {
+      const carousel = button.closest('.carousel');
+      const images = carousel.querySelectorAll('img');
+      let index = [...images].findIndex(img => img.classList.contains('active'));
+      images[index].classList.remove('active');
+      index = (index - 1 + images.length) % images.length;
+      images[index].classList.add('active');
     }
   </script>
 
