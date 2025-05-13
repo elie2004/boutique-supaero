@@ -8,7 +8,7 @@
 </head>
 <body>
   <header>
-    <nav class="navbar">
+    <nav class="nav">
       <div class="logo">Boutique ISAE-SUPAERO</div>
       <ul class="nav-links">
         <li><a href="index.html">Accueil</a></li>
@@ -41,7 +41,13 @@
   <div class="products-grid" id="productGrid">
     <div class="product" data-category="haut">
       <h2>Sweat de Promo</h2>
-      <img src="sweat.jpg" alt="Sweat Bleu Navy">
+      <div class="carousel">
+        <img src="sweat.jpg" alt="Bleu Navy" class="active">
+        <div class="carousel-controls">
+          <button onclick="prevSlide(this)">&#10094;</button>
+          <button onclick="nextSlide(this)">&#10095;</button>
+        </div>
+      </div>
       <p class="price">Adhérents AE : 25€<br>Prix public : 30€</p>
       <div class="btns">
         <button onclick="openModal('modal1')">Plus d'infos</button>
